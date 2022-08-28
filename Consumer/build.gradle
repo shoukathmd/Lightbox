@@ -1,0 +1,43 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.3'
+	id 'io.spring.dependency-management' version '1.0.13.RELEASE'
+	id 'java'
+}
+
+ext { springBootVersion = SPRING_BOOT_VERSION }
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+
+
+group = 'com.lightbox.consumer'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = JAVA_VERSION
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-amqp'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.13'
+	implementation "io.github.resilience4j:resilience4j-spring-boot2:1.7.1"
+	implementation 'org.springframework.boot:spring-boot-starter-actuator:2.4.1'
+	implementation 'org.springframework.boot:spring-boot-starter-aop:2.4.1'
+
+	implementation project(":DTO")
+	implementation project(":Model")
+	implementation project(":Converter")
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.amqp:spring-rabbit-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+dependencyManagement {
+	imports { mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}") }
+}

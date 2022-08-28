@@ -1,0 +1,42 @@
+buildscript {
+	repositories { mavenCentral() }
+}
+plugins {
+
+	id 'io.spring.dependency-management' version '1.0.13.RELEASE'
+
+}
+ext { springBootVersion = SPRING_BOOT_VERSION }
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+group = 'com.lightbox.services'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = JAVA_VERSION
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-amqp'
+	implementation project(":DTO")
+	implementation project(":Model")
+	implementation project(":Converter")
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+repositories {
+	maven {
+		url 'https://repo.spring.io/libs-milestone'
+	}
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+dependencyManagement {
+	imports { mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}") }
+}

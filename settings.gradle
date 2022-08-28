@@ -1,0 +1,8 @@
+rootProject.name = 'Lightbox'
+
+include 'Rest'
+include 'Services'
+include 'DTO'
+include 'Model'
+include 'Converter'
+include 'Consumer'

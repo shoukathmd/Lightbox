@@ -1,0 +1,42 @@
+buildscript {
+	repositories { mavenCentral() }
+}
+
+plugins {
+	id 'io.spring.dependency-management' version '1.0.13.RELEASE'
+}
+
+ext { springBootVersion = SPRING_BOOT_VERSION }
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+group = 'com.lightbox.dto'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = JAVA_VERSION
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+dependencyManagement {
+	imports { mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}") }
+}
+

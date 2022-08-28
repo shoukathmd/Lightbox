@@ -1,0 +1,44 @@
+buildscript {
+	repositories { mavenCentral() }
+}
+
+plugins {
+	id 'io.spring.dependency-management' version '1.0.13.RELEASE'
+}
+
+ext { springBootVersion = SPRING_BOOT_VERSION }
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+ext {
+	springBootVersion = SPRING_BOOT_VERSION
+	mapstructVersion = "1.4.1.Final"
+	lombokVersion = "1.18.12"
+	lombokMapstructBindingVersion = "0.2.0"
+}
+
+group = 'com.lightbox.converter'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = JAVA_VERSION
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+	annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
+	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+	implementation project(":Model")
+	implementation project(":DTO")
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+dependencyManagement {
+	imports { mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}") }
+}
