@@ -6,7 +6,7 @@
 4) Take care of logging to console the status of system, security and performance etc.
 
 # Lightbox Solution Details 
-This gradle and springboot based multi module project. Java 13 version is used.
+This is gradle and springboot based multi module project. Java 13 version is used.
 
 There is only one API post enpoint exposed at http://{ip}:8080/v0/accept
 
@@ -21,11 +21,15 @@ To run the project from command line go to parent directory i.e Lightbox and run
 
 gradle Rest:bootRun
 
+# Endpoint: 
+
 Post:/v0/accept
-Body: 
+RequestBody: 
 {
 "msg": "Testing"
 }
+Returns 200 Response
+
 
 To run consumer navigate to parent directory i.e "Lightbox" and run the below command.
 
