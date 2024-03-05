@@ -1,6 +1,5 @@
 package com.lightbox.consumer.services;
 
-import com.lightbox.consumer.http.HttpClientFactoryUtil;
 import com.lightbox.dto.LightboxRequestDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,10 +8,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-
-import java.security.KeyManagementException;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
 
 @Component
 public class LightboxTaskProcessorImpl implements LightboxTaskProcessor{
@@ -27,11 +22,11 @@ public class LightboxTaskProcessorImpl implements LightboxTaskProcessor{
 
         RestTemplate restTemplate = new RestTemplate();
 
-        try {
-            HttpClientFactoryUtil.setRequestFactory(restTemplate);
-        } catch (KeyStoreException | NoSuchAlgorithmException | KeyManagementException e) {
-            logger.warn(e.getLocalizedMessage(), e);
-        }
+//        try {
+//            HttpClientFactoryUtil.setRequestFactory(restTemplate);
+//        } catch (KeyStoreException | NoSuchAlgorithmException | KeyManagementException e) {
+//            logger.warn(e.getLocalizedMessage(), e);
+//        }
         try {
             HttpEntity<String> request = new HttpEntity<>(task.getMsg());
             logger.info("Sending task [{}] to  3rd-party-service [{}]", task.getMsg(), thirdPartyURL);

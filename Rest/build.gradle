@@ -12,6 +12,10 @@ repositories {
 	mavenCentral()
 }
 
+bootJar {
+	mainClass = 'com.lightbox.rest.Application'
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation project(":Services")
